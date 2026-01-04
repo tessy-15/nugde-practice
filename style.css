@@ -1,0 +1,288 @@
+/* ===== Base ===== */
+:root {
+  --text: #e9eefb;
+  --muted: #aab6d6;
+  --line: #233255;
+  --good: #2dd4bf;
+  --danger: #fb7185;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Noto Sans JP", sans-serif;
+  background:
+    radial-gradient(circle at 30% 10%, rgba(135,206,235,0.35), transparent 40%),
+    radial-gradient(circle at 70% 20%, rgba(255,255,200,0.25), transparent 45%),
+    linear-gradient(180deg, #5bbcff, #3b82f6 40%, #0b1220 100%);
+  color: var(--text);
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header { margin-bottom: 16px; }
+.sub { color: var(--muted); margin-top: 6px; }
+
+.screen {
+  background: rgba(10,20,30,0.85);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+}
+
+.hidden { display: none; }
+
+.row {
+  margin: 12px 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.checkbox { gap: 10px; }
+
+.muted { color: var(--muted); }
+.small { font-size: 0.9rem; }
+
+input[type="text"] {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #0b1220;
+  color: var(--text);
+}
+
+/* ===== Buttons ===== */
+button {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #0b1220;
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.primary {
+  border-color: #3b82f6;
+  background: rgba(59,130,246,0.2);
+}
+
+.good {
+  border-color: #10b981;
+  background: rgba(16,185,129,0.2);
+}
+
+.danger {
+  border-color: #ef4444;
+  background: rgba(239,68,68,0.2);
+}
+
+/* ===== Howto ===== */
+.howtoGrid {
+  display: grid;
+  gap: 12px;
+}
+@media (min-width: 720px) {
+  .howtoGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.howtoCard {
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  background: rgba(11,18,32,0.9);
+}
+
+/* ===== Trial UI ===== */
+.statusbar {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+/* ===== Scene ===== */
+.scene {
+  position: relative;
+  min-height: 520px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+/* 背景画像（鹿あり／なしで差し替え） */
+.bgImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* 張り紙（ナッジ） */
+/* ==== 張り紙（ナッジ）: しっかり目立つ版 ==== */
+/* ==== 👀 ナッジ（視線刺激・強調版 / 文章なし） ==== */
+.poster {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 12px;
+  border-radius: 12px;
+
+  /* 紙というより “小さな掲示物” */
+  background: rgba(250, 250, 240, 0.92);
+
+  /* わずかに太い枠 → 注意ポスター感は残す */
+  border: 2px solid rgba(210, 180, 90, 0.9);
+
+  /* 前景には出すが、強すぎない影 */
+  box-shadow: 0 10px 22px rgba(0,0,0,0.32);
+
+  /* 微妙に傾きを残す（貼ってある感） */
+  transform-origin: top right;
+  transform: rotate(-1.8deg);
+
+  z-index: 3;
+}
+
+/* 👀 ナッジ：存在感強め版（サイズ拡大＋凝視感アップ） */
+.eyes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* 目の間隔少し広げる */
+}
+
+/* 片目（大きめ・存在感強化） */
+.eye {
+  width: 38px;        /* ← 以前より拡大 */
+  height: 28px;
+  border-radius: 50%;
+  background: #fdfcf2;
+  border: 2.6px solid #0f172a; /* 枠やや太く */
+  position: relative;
+  box-shadow:
+    0 2px 4px rgba(0,0,0,.35),
+    0 0 6px rgba(0,0,0,.35);
+}
+
+/* 黒目（より中央寄り＋凝視感強化） */
+.eye::before {
+  content: "";
+  position: absolute;
+  width: 13px;   /* 黒目も拡大 */
+  height: 13px;
+  border-radius: 50%;
+  background: #020617;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -44%); /* 少し上寄り → 見下ろされてる感 */
+  box-shadow: 0 0 8px rgba(0,0,0,.65);
+}
+
+/* ハイライト（控えめに残す） */
+.eye::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.85);
+  top: 30%;
+  left: 60%;
+  box-shadow: 0 0 4px rgba(255,255,255,.5);
+}
+
+
+
+.posterText {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #1f2933;
+  line-height: 1.4;
+  /* 行頭にちょっとだけ余白 */
+  margin-top: 1px;
+}
+
+
+/* ナレーション */
+.narration {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 90px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 14px;
+  padding: 12px;
+  z-index: 2;
+}
+.locationTag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+.narrationText {
+  margin-top: 8px;
+  line-height: 1.8;
+}
+
+/* 選択パネル */
+.choiceCard {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  background: rgba(0,0,0,0.8);
+  padding: 14px;
+  border-radius: 14px;
+  z-index: 4;
+  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+}
+.choiceTitle {
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.choices {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.feedback {
+  color: var(--muted);
+  margin-top: 8px;
+  min-height: 1.2em;
+}
+
+/* デバッグ */
+.debug {
+  margin-top: 10px;
+  font-size: 0.85rem;
+}
+
+/* 👀 を確実に消すための強制非表示 */
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>状況体験タスク（奈良公園）</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>状況体験タスク</h1>
+      <p class="sub">
+        参加者内：シカ（背景：なし/あり）×目のマーク（あり/なし）＝4条件，各5試行（合計20試行）
+      </p>
+    </header>
+
+    <!-- 同意画面 -->
+    <section id="screen-consent" class="screen">
+      <h2>同意</h2>
+      <p class="muted">
+        卒業研究の実験です。奈良公園の場面で「ゴミをどう扱うか」に関する判断と反応時間を匿名で記録します。途中でやめても問題ありません。
+      </p>
+      <label class="row">
+        参加者ID（任意）：
+        <input id="participantId" type="text" placeholder="例：p001" />
+      </label>
+      <label class="row checkbox">
+        <input id="consentCheck" type="checkbox" />
+        内容を理解し、参加に同意します
+      </label>
+      <button id="toHowtoBtn" class="primary" disabled>次へ（操作説明）</button>
+    </section>
+
+    <!-- 操作説明 -->
+    <section id="screen-howto" class="screen hidden">
+      <h2>操作方法</h2>
+
+      <div class="howtoGrid">
+        <div class="howtoCard">
+          <h3>📱 スマートフォン</h3>
+          <ul>
+            <li>画面下の丸いボタン（1〜5）を<strong>タップ</strong>して選択します。</li>
+            <li>1〜5は「今この場面で、あなたが一番やりそうな行動」に近い番号を選んでください。</li>
+            <li>正解・不正解はありません。直感で選んでください。</li>
+          </ul>
+        </div>
+        <div class="howtoCard">
+          <h3>💻 パソコン</h3>
+          <ul>
+            <li>丸いボタン（1〜5）を<strong>クリック</strong>して選択します。</li>
+            <li>キーボード操作は不要です。</li>
+            <li>同じく直感で「自分ならこうする」を選んでください。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <button id="backToConsentBtn">戻る</button>
+        <button id="startBtn" class="primary">開始</button>
+      </div>
+      <p class="muted small">※全部で20場面、所要時間は数分です。</p>
+    </section>
+
+    <!-- 試行画面 -->
+    <section id="screen-trial" class="screen hidden">
+      <div class="statusbar">
+        <div id="progressText">Trial 1 / 20</div>
+        <div id="timerText">残り: 15.0s</div>
+      </div>
+
+      <div id="scene" class="scene">
+        <!-- 背景画像（鹿あり／なしで差し替え） -->
+        <img id="bgImage" class="bgImage" alt="背景">
+
+        <!-- ナッジ：目のマーク -->
+        <div id="eyesPoster" class="poster hidden">
+          <div class="eyes">
+            <span class="eye eye-left"></span>
+            <span class="eye eye-right"></span>
+          </div>
+        </div>
+
+        <!-- ナレーション -->
+        <div class="narration">
+          <div class="locationTag">奈良公園（観光中）</div>
+          <p id="narrationText" class="narrationText"></p>
+        </div>
+
+        <!-- 選択パネル -->
+        <div class="choiceCard">
+          <div class="choiceTitle">
+            今この場面で、あなたが一番やりそうな行動を選んでください。
+          </div>
+
+          <div id="scaleArea" class="scale-area">
+            <div class="scale-options">
+              <label class="scale-item">
+                <input type="radio" name="scale" value="1">
+                <span class="scale-circle">1</span>
+              </label>
+
+              <label class="scale-item">
+                <input type="radio" name="scale" value="2">
+                <span class="scale-circle">2</span>
+              </label>
+
+              <label class="scale-item">
+                <input type="radio" name="scale" value="3">
+                <span class="scale-circle">3</span>
+              </label>
+
+              <label class="scale-item">
+                <input type="radio" name="scale" value="4">
+                <span class="scale-circle">4</span>
+              </label>
+
+              <label class="scale-item">
+                <input type="radio" name="scale" value="5">
+                <span class="scale-circle">5</span>
+              </label>
+            </div>
+
+            <div class="scale-labels">
+              <span class="label-left">1 = 近くに置いてそのままにする</span>
+              <span class="label-right">5 = ゴミを持って移動し続ける（持っておく）</span>
+            </div>
+          </div>
+
+          <!-- ★ これが消えてて JS が死んでた -->
+          <p id="feedbackText" class="feedback"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 終了画面 -->
+    <section id="screen-end" class="screen hidden">
+      <h2>終了</h2>
+      <p class="muted">
+        お疲れさまでした。記録されたデータをCSV形式で保存できます。
+      </p>
+      <div class="row">
+        <button id="downloadCsvBtn" class="primary">CSVをダウンロード</button>
+        <button id="restartBtn">最初から</button>
+      </div>
+      <details class="debug">
+        <summary>ログ確認（JSON）</summary>
+        <pre id="logPreview"></pre>
+      </details>
+    </section>
+  </main>
+
+  <script src="./script.js"></script>
+</body>
+</html>
