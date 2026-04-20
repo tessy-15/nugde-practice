@@ -1,12 +1,13 @@
 /*************************************************
- * 状況体験タスク
+ *  教示をもっとくわしくする
+ *  状況体験タスク
  * シカ（背景：なし/あり）×目のマーク（あり/なし）
  * 参加者内要因 2×2，各5試行＝20試行
  * 選択は 1〜5 の5件法＋反応時間
  *************************************************/
 
 const TRIALS_PER_CONDITION = 5;
-const TIME_LIMIT_MS = 15000; 
+const TIME_LIMIT_MS = 20000; 
 
 // 画面
 const screenConsent = document.getElementById("screen-consent");
@@ -23,6 +24,7 @@ const startBtn = document.getElementById("startBtn");
 
 // 試行画面 DOM
 const bgImage = document.getElementById("bgImage");
+const deerImage = document.getElementById("deerImage");
 const eyesPoster = document.getElementById("eyesPoster");
 const narrationText = document.getElementById("narrationText");
 const progressText = document.getElementById("progressText");
@@ -88,12 +90,16 @@ function narrationFor(t) {
 
 // 条件反映：背景と👀表示
 function applyCondition(t) {
-  // 背景画像
-  bgImage.src = t.deer === 1
-    ? "./images/background_deer.png"
-    : "./images/background_normal.png";
+  // 背景は常に同じ
+  bgImage.src = "./images/background_normal.png";
 
-  // 👀 ナッジの表示リセット → 条件に応じて表示
+  // 鹿は条件によって表示/非表示を切り替える
+  deerImage.classList.add("hidden");
+  if (t.deer === 1) {
+    deerImage.classList.remove("hidden");
+  }
+
+  // 👀 ナッジ
   eyesPoster.classList.add("hidden");
   if (t.eyes === 1) {
     eyesPoster.classList.remove("hidden");
@@ -226,11 +232,26 @@ function endExperiment() {
 
 function toCsv(rows) {
   if (!rows.length) return "";
-  const headers = Object.keys(rows[0]);
+
+  const headers = [
+    "participantId",
+    "trialIndex",
+    "deer",
+    "deerLabel",
+    "eyes",
+    "eyesLabel",
+    "scale",
+    "rtMs",
+    "timeout",
+    "timestamp"
+  ];
+
   const lines = [headers.join(",")];
+
   for (const r of rows) {
-    lines.push(headers.map(h => r[h] === null ? "" : r[h]).join(","));
+    lines.push(headers.map(h => r[h] ?? "").join(","));
   }
+
   return lines.join("\n");
 }
 
@@ -294,3 +315,45 @@ restartBtn.addEventListener("click", () => {
 
 // 初期画面
 showOnly(screenConsent);
+
+logs.push({
+  participantId,
+  trialIndex: currentIndex + 1,
+  deer: t.deer,
+  deerLabel: t.deer === 1 ? "あり" : "なし",
+
+  eyes: t.eyes,
+  eyesLabel: t.eyes === 1 ? "あり" : "なし",
+
+  scale: Number(value),
+  rtMs: rt,
+  timeout: 0,
+  timestamp: new Date().toISOString()
+});
+
+function endExperiment() {
+  showOnly(screenEnd);
+
+  // コピペ用テキスト生成
+  const resultText = JSON.stringify(logs);
+
+  logPreview.textContent = resultText;
+}
+
+// コピー機能
+function copyResult() {
+  const text = document.getElementById("logPreview").textContent;
+
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      alert("コピーしました！提出フォームに貼り付けてください！");
+    })
+    .catch(() => {
+      alert("コピーに失敗しました");
+    });
+}
+
+const resultText = JSON.stringify(logs, null, 2);
+
+alert("コピーしました！そのままフォームに貼り付けてください！");
+

@@ -227,13 +227,20 @@ button:disabled {
 /* ナレーション */
 .narration {
   position: absolute;
-  left: 14px;
-  right: 14px;
-  top: 90px;
-  background: rgba(0,0,0,0.6);
-  border-radius: 14px;
-  padding: 12px;
-  z-index: 2;
+
+  top: 4%;   /* ← 上にある状態に戻す */
+  left: 50%;
+  transform: translateX(-50%);
+
+  max-width: 420px;
+  padding: 8px 12px;
+
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+
+  color: #fff;
+  z-index: 5;
 }
 .locationTag {
   display: inline-block;
@@ -250,18 +257,26 @@ button:disabled {
 /* 選択パネル */
 .choiceCard {
   position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 14px;
-  background: rgba(0,0,0,0.8);
-  padding: 14px;
-  border-radius: 14px;
-  z-index: 4;
-  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 90%;
+  max-width: 420px;
+
+  padding: 6px 10px;   /* ← ここが一番重要（上下削る） */
+
+  background: rgba(0, 0, 0, 0.26);
+  backdrop-filter: blur(6px);
+
+  border-radius: 12px;
+  z-index: 10;
 }
+
 .choiceTitle {
-  color: var(--muted);
-  margin-bottom: 8px;
+  margin-bottom: 4px;   /* ← 元より小さく */
+  font-size: 0.95rem;
 }
 .choices {
   display: flex;
@@ -285,4 +300,131 @@ button:disabled {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
+}
+
+/* ===== 5件法スケール ===== */
+.scale-area {
+  margin-top: 6px;   /* ← 元12pxくらいを削る */
+  gap: 6px;
+}
+
+.scale-options {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+.scale-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scale-item input[type="radio"] {
+  display: none;
+}
+
+.scale-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  border: 2px solid #6b7280;
+  color: #111827;
+  font-weight: 800;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.12s ease;
+  user-select: none;
+}
+
+.scale-circle:hover {
+  cursor: pointer;
+  transform: scale(1.04);
+}
+
+.scale-item input[type="radio"]:checked + .scale-circle {
+  background: #2563eb;
+  color: white;
+  border-color: #1d4ed8;
+  transform: scale(1.06);
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.45);
+}
+
+.scale-labels {
+  font-size: 0.75rem;
+  margin-top: 2px;
+  opacity: 0.8;
+}
+
+.label-left,
+.label-right {
+  max-width: 45%;
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .scale-circle {
+    width: 44px;
+    height: 44px;
+    font-size: 0.95rem;
+  }
+
+  .scale-labels {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .label-left,
+  .label-right {
+    max-width: 100%;
+  }
+}
+
+.deer {
+  position: absolute;
+
+  bottom: 12%;
+  left: -6%;
+
+  width: 320px;
+
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.95;
+
+  filter: brightness(0.92) drop-shadow(0 10px 16px rgba(0,0,0,0.4));
+}
+
+.trash {
+  position: absolute;
+
+  bottom: 0%;
+  right: 4%;   /* ← leftじゃなくてrightにするのがポイント */
+
+  width: 200px;
+
+  z-index: 2;  /* 鹿より少し前、UIよりは後ろ */
+  pointer-events: none;
+  opacity: 0.95;
+
+  filter: brightness(0.9) drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+}
+
+.narration {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.narration {
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+}
+
+.submit-guide {
+  margin: 10px 0 12px;
+  line-height: 1.7;
 }
