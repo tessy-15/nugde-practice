@@ -512,16 +512,16 @@ button:disabled {
 
   /* 鹿は少し小さく */
   .deer {
-    width: 220px;
-    left: -10%;
-    bottom: 14%;
+    width: 180px;
+    left: -6%;
+    bottom: 10%;
   }
 
   /* ゴミをかなり小さくして右下へ */
   .trash {
-    width: 90px;
-    right: 3%;
-    bottom: 8%;
+    width: 70px;
+    right: 6%;
+    bottom: 10%;
   }
 
   /* 選択枠は幅広・高さ控えめ */
