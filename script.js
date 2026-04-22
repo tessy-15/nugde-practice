@@ -78,7 +78,7 @@ function narrationFor(t) {
 }
 
 function applyCondition(t) {
-  bgImage.src = "./images/background_normal.png?v=3";
+  bgImage.src = "./images/background_normal.png?v=6";
 
   deerImage.classList.add("hidden");
   if (t.deer === 1) deerImage.classList.remove("hidden");
