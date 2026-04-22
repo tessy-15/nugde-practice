@@ -36,15 +36,9 @@
     <section id="screen-howto" class="screen hidden">
       <h2>操作方法</h2>
 
-      <div class="howtoGrid">
-        <div class="howtoCard">
-          <h3>📱 スマートフォン</h3>
-          <ul>
-            <li>画面下の丸いボタン（1〜5）をタップして選択します。</li>
-            <li>1〜5は「今この場面で、あなたが一番やりそうな行動」に近い番号を選んでください。</li>
-            <li>正解・不正解はありません。直感で選んでください。</li>
-          </ul>
-        </div>
+      <p class="muted">
+※本実験はパソコンでの実施を想定しています（スマートフォンでは正しく表示されない場合があります）
+</p>
         <div class="howtoCard">
           <h3>💻 パソコン</h3>
           <ul>
@@ -66,20 +60,14 @@
     <section id="screen-trial" class="screen hidden">
       <div class="statusbar">
         <div id="progressText">Trial 1 / 20</div>
-        <div id="timerText">残り: 20.0s</div>
+        <div id="timerText">残り: 30.0s</div>
       </div>
 
       <div id="scene" class="scene">
         <img id="bgImage" class="bgImage" alt="背景" />
         <img id="deerImage" class="deer" src="./images/newdeer.png" alt="鹿" />
         <img id="trashImage" class="trash" src="./images/trash.png" alt="ゴミ" />
-
-        <div id="eyesPoster" class="poster hidden">
-          <div class="eyes">
-            <span class="eye eye-left"></span>
-            <span class="eye eye-right"></span>
-          </div>
-        </div>
+        <img id="nudgeImage" class="nudge" src="./images/nudge.png?v=4" alt="視線ナッジ">
 
         <div class="narration">
           <div class="locationTag">奈良公園（観光中）</div>
