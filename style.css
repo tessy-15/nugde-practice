@@ -134,95 +134,17 @@ button:disabled {
 }
 
 /* 張り紙（ナッジ） */
-/* ==== 張り紙（ナッジ）: しっかり目立つ版 ==== */
-/* ==== 👀 ナッジ（視線刺激・強調版 / 文章なし） ==== */
-.poster {
+.nudge {
   position: absolute;
-  top: 18px;
-  right: 18px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 10px 12px;
-  border-radius: 12px;
-
-  /* 紙というより “小さな掲示物” */
-  background: rgba(250, 250, 240, 0.92);
-
-  /* わずかに太い枠 → 注意ポスター感は残す */
-  border: 2px solid rgba(210, 180, 90, 0.9);
-
-  /* 前景には出すが、強すぎない影 */
-  box-shadow: 0 10px 22px rgba(0,0,0,0.32);
-
-  /* 微妙に傾きを残す（貼ってある感） */
-  transform-origin: top right;
-  transform: rotate(-1.8deg);
-
-  z-index: 3;
+  top: 20px;
+  right: 20px;
+  width: 140px;
+  z-index: 999;
+  opacity: 1;
+  pointer-events: none;
+  outline: 2px solid red;
+  background: rgba(255, 255, 255, 0.2);
 }
-
-/* 👀 ナッジ：存在感強め版（サイズ拡大＋凝視感アップ） */
-.eyes {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px; /* 目の間隔少し広げる */
-}
-
-/* 片目（大きめ・存在感強化） */
-.eye {
-  width: 38px;        /* ← 以前より拡大 */
-  height: 28px;
-  border-radius: 50%;
-  background: #fdfcf2;
-  border: 2.6px solid #0f172a; /* 枠やや太く */
-  position: relative;
-  box-shadow:
-    0 2px 4px rgba(0,0,0,.35),
-    0 0 6px rgba(0,0,0,.35);
-}
-
-/* 黒目（より中央寄り＋凝視感強化） */
-.eye::before {
-  content: "";
-  position: absolute;
-  width: 13px;   /* 黒目も拡大 */
-  height: 13px;
-  border-radius: 50%;
-  background: #020617;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -44%); /* 少し上寄り → 見下ろされてる感 */
-  box-shadow: 0 0 8px rgba(0,0,0,.65);
-}
-
-/* ハイライト（控えめに残す） */
-.eye::after {
-  content: "";
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.85);
-  top: 30%;
-  left: 60%;
-  box-shadow: 0 0 4px rgba(255,255,255,.5);
-}
-
-
-
-.posterText {
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: #1f2933;
-  line-height: 1.4;
-  /* 行頭にちょっとだけ余白 */
-  margin-top: 1px;
-}
-
 
 /* ナレーション */
 .narration {
@@ -487,28 +409,6 @@ button:disabled {
     margin-top: 6px;
   }
 
-  /* 目のマークを少し小さく */
-  .poster {
-    top: 10px;
-    right: 10px;
-    padding: 6px 8px;
-    border-radius: 10px;
-  }
-
-  .eye {
-    width: 26px;
-    height: 20px;
-  }
-
-  .eye::before {
-    width: 9px;
-    height: 9px;
-  }
-
-  .eye::after {
-    width: 4px;
-    height: 4px;
-  }
 
   /* 鹿は少し小さく */
   .deer {
@@ -584,3 +484,4 @@ button:disabled {
     font-size: 0.95rem;
   }
 }
+
