@@ -136,14 +136,20 @@ button:disabled {
 /* 張り紙（ナッジ） */
 .nudge {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 140px;
-  z-index: 999;
-  opacity: 1;
+
+  /* 左下エリアに配置 */
+  bottom: 35px;   /* 下からの距離 */
+  left: 100px;     /* 左からの距離 */
+
+  /* サイズ大きく */
+  width: 280px;    /* ←ここが3倍くらい */
+
+  z-index: 4;
   pointer-events: none;
-  outline: 2px solid red;
-  background: rgba(255, 255, 255, 0.2);
+  opacity: 0.95;
+
+  /* 少し自然に浮かせる */
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4));
 }
 
 /* ナレーション */
